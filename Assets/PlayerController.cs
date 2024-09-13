@@ -32,7 +32,14 @@ public class PlayerController : MonoBehaviour
 
     void MakeDebugLines(){
         foreach (GameObject pointObject in pointObjects){
-            Debug.DrawLine(pointObject.transform.position, transform.position, Color.green, 0);
+            float dotProduct = Vector3.Dot(Vector3.forward, GetNormalizedDiff(transform.position, pointObject.transform.position));
+            Debug.DrawLine(pointObject.transform.position, transform.position, dotProduct > 0 ? Color.green : Color.red, 0);
         }
+    }
+
+    Vector3 GetNormalizedDiff(Vector3 a, Vector3 b){
+        Vector3 diff = b - a;
+        diff.Normalize();
+        return diff;
     }
 }
