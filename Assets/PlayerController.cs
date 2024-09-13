@@ -16,16 +16,23 @@ public class PlayerController : MonoBehaviour
         MakePoints();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        rigidbody.velocity = movement * speed;
+        MakeDebugLines();
+    }
+
     void MakePoints(){
         foreach (Vector3 point in points){
             pointObjects.Add(Instantiate(pointPrefab, point, Quaternion.identity));
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        rigidbody.velocity = movement * speed;
+    void MakeDebugLines(){
+        foreach (GameObject pointObject in pointObjects){
+            Debug.DrawLine(pointObject.transform.position, transform.position, Color.green, 0);
+        }
     }
 }
