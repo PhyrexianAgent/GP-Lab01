@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Vector3[] points = new Vector3[8];
     [SerializeField] private GameObject pointPrefab;
+    [SerializeField] private float speed = 1f;
 
     private Rigidbody rigidbody;
     private List<GameObject> pointObjects = new List<GameObject>();
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        rigidbody.velocity = movement * speed;
     }
 }
